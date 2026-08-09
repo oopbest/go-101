@@ -152,10 +152,17 @@
 - **ตัวอย่างโค้ดระบบจริง**: Function คำนวณ VAT, Function ดึงรายการสินค้าแบบ Table และ Procedure ย้ายสินค้าข้าม Supplier
 - **ข้อดีและข้อเสีย**: เปรียบเทียบ Performance, Security, Vendor Lock-in, และความยากง่ายในการ Maintenance/Testing
 
+### 17. [การใช้งาน GORM ร่วมกับ PostgreSQL (GORM in Go)](topics/gorm.md)
+สรุปการใช้งาน GORM ซึ่งเป็น ORM สำหรับภาษา Go เพื่อจัดการ PostgreSQL ด้วย Struct และ Method:
+- **การติดตั้งและเชื่อมต่อฐานข้อมูล**: การใช้ `gorm.io/gorm` ร่วมกับ `gorm.io/driver/postgres` และการตั้งค่า Connection Pool
+- **Models, Tags และ Auto Migration**: การกำหนด Primary Key, Column Constraints, Relationships และการสร้างหรือปรับ Schema ด้วย `AutoMigrate()`
+- **CRUD Operations**: การใช้ `Create()`, `First()`, `Find()`, `Updates()` และ `Delete()` พร้อมตรวจสอบ `Error` และ `RowsAffected`
+- **Associations และ Transactions**: การโหลดข้อมูลที่เกี่ยวข้องด้วย `Preload()` และการทำงานหลายคำสั่งอย่างเป็นชุดด้วย `Transaction()`
+- **แนวปฏิบัติที่ดี**: การส่ง `context.Context`, ป้องกันการ Update/Delete โดยไม่มีเงื่อนไข และแยก Database Model ออกจาก API DTO
+
 ---
 
 > [!TIP]
 > คลิกที่หัวข้อด้านบนเพื่อเปิดอ่านบทเรียนและตัวอย่างโค้ดของแต่ละเรื่องได้เลยครับ!
-
 
 
