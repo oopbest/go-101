@@ -152,17 +152,20 @@
 - **ตัวอย่างโค้ดระบบจริง**: Function คำนวณ VAT, Function ดึงรายการสินค้าแบบ Table และ Procedure ย้ายสินค้าข้าม Supplier
 - **ข้อดีและข้อเสีย**: เปรียบเทียบ Performance, Security, Vendor Lock-in, และความยากง่ายในการ Maintenance/Testing
 
-### 17. [การใช้งาน GORM ร่วมกับ PostgreSQL (GORM in Go)](topics/gorm.md)
-สรุปการใช้งาน GORM ซึ่งเป็น ORM สำหรับภาษา Go เพื่อจัดการ PostgreSQL ด้วย Struct และ Method:
+### 17. [แนวคิด ORM, ODM และการใช้งาน GORM ร่วมกับ PostgreSQL](topics/gorm.md)
+สรุปแนวคิดการเชื่อมโลกของ Object ในโปรแกรมเข้ากับรูปแบบข้อมูลในฐานข้อมูล พร้อมการใช้ GORM ในภาษา Go:
+- **ORM (Object-Relational Mapping)**: แปลง Struct/Object ให้สัมพันธ์กับ Table, Row, Column, Primary Key และ Foreign Key ในฐานข้อมูลเชิงสัมพันธ์ เช่น PostgreSQL และ MySQL ช่วยลด SQL ซ้ำ ๆ แต่ผู้พัฒนายังควรเข้าใจ SQL, Index และ Query Plan
+- **ODM (Object-Document Mapping)**: แปลง Struct/Object ให้สัมพันธ์กับ Document และ Collection ในฐานข้อมูลแบบ Document เช่น MongoDB ซึ่งเหมาะกับข้อมูล JSON/BSON ที่มีโครงสร้างยืดหยุ่นและใช้ Embedded Document หรือ Reference แทนการ JOIN แบบ Relational
+- **ORM vs ODM**: ORM ทำงานกับ Schema และ Relationships ของฐานข้อมูล SQL ส่วน ODM ทำงานกับ Document ที่สามารถซ้อนข้อมูลและมี Field แตกต่างกันได้ ทั้งสองแนวคิดช่วยเรื่อง Mapping, Validation และ CRUD แต่ไม่สามารถใช้แทนกันโดยตรง
+- **ตำแหน่งของ GORM**: GORM เป็น **ORM ไม่ใช่ ODM** ออกแบบมาสำหรับฐานข้อมูลเชิงสัมพันธ์ จึงเหมาะกับ PostgreSQL ในโปรเจกต์นี้ หากใช้ MongoDB ควรเลือก MongoDB Driver หรือไลบรารี ODM ที่รองรับ Document Database โดยเฉพาะ
+- **ข้อดีและข้อแลกเปลี่ยน**: ORM/ODM ช่วยลด Boilerplate และเพิ่มความเร็วในการพัฒนา แต่ abstraction อาจซ่อน Query ที่ไม่มีประสิทธิภาพ เช่น N+1 Queries จึงควรเปิด SQL Log และตรวจสอบ Query ที่ระบบสร้างขึ้น
 - **การติดตั้งและเชื่อมต่อฐานข้อมูล**: การใช้ `gorm.io/gorm` ร่วมกับ `gorm.io/driver/postgres` และการตั้งค่า Connection Pool
 - **Models, Tags และ Auto Migration**: การกำหนด Primary Key, Column Constraints, Relationships และการสร้างหรือปรับ Schema ด้วย `AutoMigrate()`
-- **CRUD Operations**: การใช้ `Create()`, `First()`, `Find()`, `Updates()` และ `Delete()` พร้อมตรวจสอบ `Error` และ `RowsAffected`
-- **Associations และ Transactions**: การโหลดข้อมูลที่เกี่ยวข้องด้วย `Preload()` และการทำงานหลายคำสั่งอย่างเป็นชุดด้วย `Transaction()`
-- **แนวปฏิบัติที่ดี**: การส่ง `context.Context`, ป้องกันการ Update/Delete โดยไม่มีเงื่อนไข และแยก Database Model ออกจาก API DTO
+- **CRUD, Associations และ Transactions**: การใช้ `Create()`, `First()`, `Find()`, `Updates()`, `Delete()`, `Preload()` และ `Transaction()` พร้อมตรวจสอบ `Error` และ `RowsAffected`
+- **แนวปฏิบัติที่ดี**: การส่ง `context.Context`, ป้องกันการ Update/Delete โดยไม่มีเงื่อนไข แยก Database Model ออกจาก API DTO และเลือกใช้ Raw SQL เมื่อ Query ซับซ้อนหรือจำเป็นต้องปรับประสิทธิภาพเฉพาะจุด
 
 ---
 
 > [!TIP]
 > คลิกที่หัวข้อด้านบนเพื่อเปิดอ่านบทเรียนและตัวอย่างโค้ดของแต่ละเรื่องได้เลยครับ!
-
 
