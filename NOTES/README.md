@@ -162,10 +162,11 @@
 - **การติดตั้งและเชื่อมต่อฐานข้อมูล**: การใช้ `gorm.io/gorm` ร่วมกับ `gorm.io/driver/postgres` และการตั้งค่า Connection Pool
 - **Models, Tags และ Auto Migration**: การกำหนด Primary Key, Column Constraints, Relationships และการสร้างหรือปรับ Schema ด้วย `AutoMigrate()`
 - **CRUD, Associations และ Transactions**: การใช้ `Create()`, `First()`, `Find()`, `Updates()`, `Delete()`, `Preload()` และ `Transaction()` พร้อมตรวจสอบ `Error` และ `RowsAffected`
+- **Soft Delete**: การใช้ `gorm.Model` หรือ `gorm.DeletedAt` เพื่อกำหนดค่า `deleted_at` แทนการลบแถวจริง โดย Query ปกติจะไม่คืนข้อมูลที่ถูกลบ สามารถใช้ `Unscoped()` เพื่อค้นหาหรือลบถาวร และควรพิจารณาผลต่อ Unique Index กับ Foreign Key เพราะ Soft Delete เป็นคำสั่ง `UPDATE` ไม่ใช่ `DELETE`
+- **GORM Logger และ SQL Logs**: การตั้งค่า `logger.Default.LogMode()` ด้วยระดับ `Silent`, `Error`, `Warn` และ `Info` เพื่อดู SQL, ระยะเวลาทำงาน, จำนวนแถว และ Error ระหว่างพัฒนา พร้อมข้อควรระวังไม่แสดง SQL หรือค่าพารามิเตอร์ที่อาจมีข้อมูลสำคัญใน Production
 - **แนวปฏิบัติที่ดี**: การส่ง `context.Context`, ป้องกันการ Update/Delete โดยไม่มีเงื่อนไข แยก Database Model ออกจาก API DTO และเลือกใช้ Raw SQL เมื่อ Query ซับซ้อนหรือจำเป็นต้องปรับประสิทธิภาพเฉพาะจุด
 
 ---
 
 > [!TIP]
 > คลิกที่หัวข้อด้านบนเพื่อเปิดอ่านบทเรียนและตัวอย่างโค้ดของแต่ละเรื่องได้เลยครับ!
-
