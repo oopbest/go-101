@@ -30,6 +30,7 @@
 
 ### 3. การทดสอบ จัดฟอร์แมต และตรวจสอบระบบ (Testing & Tools)
 - **`go test ./...`** : รัน Unit Test ทั้งหมดในโปรเจกต์และ sub-packages
+- **`go vet ./...`** : วิเคราะห์และตรวจสอบข้อผิดพลาดในโค้ด (Static Analysis) เช่น `fmt.Printf` format string ไม่ตรงชนิดข้อมูล, Unreachable Code หรือการใช้ Mutex/Lock ผิดพลาด
 - **`go fmt ./...`** : จัดรูปแบบจัดหน้าโค้ด (Formatting) ทุกไฟล์ในโปรเจกต์ให้เป็นมาตรฐานของ Go โดยอัตโนมัติ
 - **`go env`** : แสดงค่าการตั้งค่า Environment Variables ทั้งหมดของ Go (เช่น `GOPATH`, `GOROOT`)
 
@@ -47,6 +48,7 @@
 | **คอมไพล์สำหรับ Production** | `go build` | `npm run build` | สร้างไฟล์คอมไพล์ (`Binary Executable` vs `JS Bundle`) |
 | **ติดตั้ง CLI Tool แบบ Global** | `go install <path>` | `npm install -g <package>` | ติดตั้งคำสั่งไว้ในระบบเพื่อเรียกใช้ได้ทุกที่ |
 | **รัน Unit Test** | `go test ./...` | `npm test` | รันชุดทดสอบความถูกต้องของโค้ด |
+| **วิเคราะห์ตรวจสอบข้อผิดพลาด** | `go vet ./...` | `npm run lint` / `eslint .` | ตรวจสอบบั๊กและรูปแบบโค้ดด้วย Static Analysis |
 | **จัดฟอร์แมตโค้ดอัตโนมัติ** | `go fmt ./...` | `npx prettier --write .` | จัดหน้าโค้ดให้เรียบร้อยตามมาตรฐานภาษา |
 | **ไฟล์ข้อมูล Dependencies** | `go.mod` | `package.json` | ไฟล์หลักระบุเวอร์ชันและรายชื่อแพ็กเกจ |
 | **ไฟล์ Lock Version & Hash** | `go.sum` | `package-lock.json` | ไฟล์เก็บ Checksum ยืนยันความถูกต้องของเวอร์ชัน |
